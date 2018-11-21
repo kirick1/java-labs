@@ -1,2 +1,1 @@
-# java-labs
-Bogomazov
+# Java Labs
