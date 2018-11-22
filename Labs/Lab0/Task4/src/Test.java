@@ -1,4 +1,4 @@
-import lib.com.gmail.vlkr.hello.HelloWriter;
+import com.gmail.vlkr.hello.HelloWriter;
 
 public class Test {
 	public static void main (String [] args) {

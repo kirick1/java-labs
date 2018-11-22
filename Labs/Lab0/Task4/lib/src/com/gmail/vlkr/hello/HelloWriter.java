@@ -1,4 +1,4 @@
-package lib.com.gmail.vlkr.hello;
+package com.gmail.vlkr.hello;
 
 public class HelloWriter {
 	private String string = "Hello World!";
