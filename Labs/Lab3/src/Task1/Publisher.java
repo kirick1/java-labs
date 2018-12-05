@@ -16,7 +16,7 @@ public class Publisher {
   }
   @Override
   public String toString () {
-    return "Publisher {\n" +
+    return "{\n" +
             "\t\ttitle: '" + this.title + '\n' +
             "\t}";
   }

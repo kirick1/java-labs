@@ -25,7 +25,7 @@ public class Author {
   }
   @Override
   public String toString () {
-    return "Author {\n" +
+    return "{\n" +
             "\t\tfirstName: '" + this.firstName + '\n' +
             "\t\tlastName: '" + this.lastName + '\n' +
             "\t}";
@@ -47,7 +47,7 @@ public class Author {
     Book[] result = new Book[booksNumber];
     for (int index = 0, counter = 0; index < booksNumber && counter < booksNumber; index++) {
       Book book = books[index];
-      if (book.getAuthor().equals(this)) {
+      if (book.getAuthors().equals(this)) {
         result[counter] = book;
         counter++;
       }
