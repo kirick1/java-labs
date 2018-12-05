@@ -13,6 +13,7 @@ public class Books {
     return this.books;
   }
   public void setBooks(Book[] books) {
+    if (books == null) throw new IllegalArgumentException("books are required!");
     this.books = books;
   }
   @Override
