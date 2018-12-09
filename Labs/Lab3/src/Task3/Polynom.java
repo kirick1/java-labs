@@ -47,10 +47,40 @@ class Polynom {
 
   @Override
   public String toString() {
-    return  "Polynom {" +
-            "\tpower: " + this.power + '\n' +
-            "\tparams: " + this.params.toString() + '\n' +
-            "}";
+    int power = this.getPower();
+    StringBuilder string = new StringBuilder();
+    while (power < this.getPower() && this.getParams(power) == 0) power++;
+    if (power == 0) string.append(this.getParams(0));
+    else {
+      int first = this.getParams(power);
+      string.append(first);
+      string.append("x^");
+      string.append(power);
+      power--;
+      for (int index = power; index > 0; index--) {
+        int current = this.getParams(index);
+        if (current < 0) {
+          string.append(" - ");
+          string.append(current);
+        } else {
+          string.append(" + ");
+          string.append(current);
+        }
+        if (current != 0) {
+          string.append("x^");
+          string.append(index);
+        }
+      }
+      int last = this.getParams(0);
+      if (last < 0) {
+        string.append(" - ");
+        string.append(last);
+      } else {
+        string.append(" + ");
+        string.append(last);
+      }
+    }
+    return string.toString();
   }
 
   @Override

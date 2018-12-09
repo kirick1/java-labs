@@ -12,7 +12,7 @@ public class Word {
   }
 
   public String getValue() {
-    return value;
+    return this.value;
   }
 
   public void setValue(String value) {
@@ -39,8 +39,6 @@ public class Word {
 
   @Override
   public String toString() {
-    return  "Word {" +
-            "\tvalue:'" + this.value + '\n' +
-            "}";
+    return this.value;
   }
 }

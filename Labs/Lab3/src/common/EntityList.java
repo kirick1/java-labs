@@ -13,7 +13,7 @@ public class EntityList<T> {
     public EntityList() {};
 
     public T get(int index) {
-        return elements.get(index);
+        return this.elements.get(index);
     }
 
     public ArrayList<T> remove(int index) {
@@ -21,7 +21,7 @@ public class EntityList<T> {
     }
 
     public ArrayList<T> getElements() {
-        return elements;
+        return this.elements;
     }
 
     public void add(T element) {
@@ -34,9 +34,7 @@ public class EntityList<T> {
 
     @Override
     public String toString() {
-        return "EntityList{" +
-                "elements=" + this.elements +
-                '}';
+        return this.elements.toString();
     }
 
     @Override
