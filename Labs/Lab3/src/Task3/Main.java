@@ -2,17 +2,17 @@ package Task3;
 
 public class Main {
     public static void main(String[] args) {
-        Polynom polynom1 = new Polynom(1);
-        polynom1.input();
+        Polynom polynom1 = IO.input();
         System.out.print("P(x) = ");
-        polynom1.output();
-        Polynom polynom2 = new Polynom(2);
-        polynom2.input();
+        IO.output(polynom1);
+        Polynom polynom2 = IO.input();
         System.out.print("Q(x) = ");
-        polynom2.output();
-        polynom1.add(polynom2);
+        IO.output(polynom2);
+        polynom1 = polynom1.add(polynom2);
         System.out.print("P(x) + Q(x) = ");
-        polynom2.output();
-        polynom1.multiply(polynom2);
+        IO.output(polynom1);
+        polynom1 = polynom1.multiply(polynom2);
+        System.out.print("P(x) * Q(x) = ");
+        IO.output(polynom1);
     }
 }

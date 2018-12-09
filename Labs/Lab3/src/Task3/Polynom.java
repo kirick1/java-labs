@@ -13,9 +13,8 @@ class Polynom {
   public Polynom(int power) {
     this.power = power;
     EntityList<Integer> params = new EntityList<Integer>();
-    for (int i = 0; i <= this.power; i++) {
-      params.add(0);
-    }
+    for (int index = 0; index <= this.power; index++) params.add(0);
+    this.params = params;
   }
 
   public int getPower() {
@@ -42,6 +41,7 @@ class Polynom {
 
   public void setParams(int index, int value) {
     assert index >= 0 && index < this.getPower() : "index must be in range from 0 to power";
+    assert this.params != null : "params is null!";
     this.params.addByIndex(index, value);
   }
 
@@ -54,12 +54,11 @@ class Polynom {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Polynom polynom = (Polynom) o;
-    return power == polynom.power &&
-            Objects.equals(params, polynom.params);
+  public boolean equals(Object object) {
+    if (this == object) return true;
+    if (object == null || this.getClass() != object.getClass()) return false;
+    Polynom polynom = (Polynom) object;
+    return this.power == polynom.power && Objects.equals(this.params, polynom.params);
   }
 
   @Override
@@ -67,76 +66,29 @@ class Polynom {
     return Objects.hash(power, params);
   }
 
-  public void add(Polynom polynom) {
+  public Polynom add(Polynom polynom) {
     assert polynom != null : "polynom is required!";
     int resultPower = this.getPower() > polynom.getPower() ? this.getPower() : polynom.getPower();
-    Polynom sum = new Polynom(resultPower);
-    for(int index = 0; index < resultPower; index++ ) {
-      int current = sum.getParams(index);
-      int next = current + polynom.getParams(index);
-      sum.setParams(index, next);
+    Polynom result = new Polynom(resultPower);
+    for (int index = 0; index <= resultPower; index++ ) {
+      int current = this.getParams(index);
+      int value = polynom.getParams(index);
+      int next = current + value;
+      result.setParams(index, next);
     }
+    return result;
   }
 
-  public void multiply(Polynom polynom) {
+  public Polynom multiply(Polynom polynom) {
     assert polynom != null : "multiplier polynom is required!";
     int resultPower = this.getPower() > polynom.getPower() ? this.getPower() : polynom.getPower();
-    this.power = resultPower;
-    for (int index = 0; index < resultPower; index++) {
+    Polynom result = new Polynom(resultPower);
+    for (int index = 0; index <= resultPower; index++) {
       int current = this.getParams(index);
-      int multiplier = polynom.getParams(index);
-      this.params.addByIndex(index, current * multiplier);
+      int value = polynom.getParams(index);
+      int next = current * value;
+      result.setParams(index, next);
     }
+    return result;
   }
-
-  public void input() {
-    Scanner input = new Scanner(System.in);
-    System.out.println("Введите степень многочлена:");
-    int valuePower = input.nextInt();
-    this.setPower(valuePower);
-    EntityList<Integer> valueParams = new EntityList<>(){{add(valuePower + 2);}};
-    this.setParams(valueParams);
-    System.out.println("Введите коэфиценты многочлена:");
-    for (int index = 0; index <= this.getPower(); index++) {
-      int value = input.nextInt();
-      this.setParams(index, value);
-    }
-  }
-
-  public void output() {
-    int power = this.getPower();
-    while (this.getParams(power) == 0) power++;
-    if (power == 0) System.out.println(this.getParams(0));
-    else {
-      StringBuilder string = new StringBuilder();
-      int first = this.getParams(power);
-      string.append(first);
-      string.append("x^");
-      string.append(power);
-      power--;
-      for(int index = power; index > 0; index--) {
-        int current = this.getParams(index);
-        if (current < 0) {
-          string.append(current);
-        }
-        if (current > 0) {
-          string.append(" + ");
-          string.append(current);
-        }
-        if (current != 0) {
-          string.append("x^");
-          string.append(index);
-        }
-      }
-      int last = this.getParams(0);
-      if (last < 0) {
-        string.append(last);
-      } else {
-        string.append(" + ");
-        string.append(last);
-      }
-      System.out.println(string.toString());
-    }
-  }
-
 }

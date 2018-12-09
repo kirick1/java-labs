@@ -12,40 +12,44 @@ public class EntityList<T> {
 
     public EntityList() {};
 
-    public T get(int index) { return elements.get(index); }
+    public T get(int index) {
+        return elements.get(index);
+    }
 
     public ArrayList<T> remove(int index) {
         return (ArrayList<T>) elements.remove(index);
     }
 
-    public ArrayList<T> getElements() {return elements;}
+    public ArrayList<T> getElements() {
+        return elements;
+    }
 
     public void add(T element) {
-        elements.add(element);
+        this.elements.add(element);
     }
 
     public void addByIndex(int index, T element) {
-        elements.add(index, element);
+        this.elements.add(index, element);
     }
 
     @Override
     public String toString() {
         return "EntityList{" +
-                "elements=" + elements +
+                "elements=" + this.elements +
                 '}';
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        EntityList<?> that = (EntityList<?>) o;
-        return Objects.equals(elements, that.elements);
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        EntityList<?> that = (EntityList<?>) object;
+        return Objects.equals(this.elements, that.elements);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(elements);
+        return Objects.hash(this.elements);
     }
 }
 
