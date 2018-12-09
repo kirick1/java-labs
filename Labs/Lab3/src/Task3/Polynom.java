@@ -1,58 +1,72 @@
 package Task3;
 
+import сommon.EntityList;
+
 import java.util.*;
 
 class Polynom {
-  private int power;
-  private int[] params;
 
-  Polynom(int power) {
+  private int power;
+
+  private EntityList<Integer> params;
+
+  public Polynom(int power) {
     this.power = power;
-    this.params = new int[this.power + 1];
+    EntityList<Integer> params = new EntityList<Integer>();
     for (int i = 0; i <= this.power; i++) {
-      this.params[i] = 0;
+      params.add(0);
     }
   }
+
   public int getPower() {
     return this.power;
   }
+
   public void setPower(int power) {
     this.power = power;
   }
-  public int[] getParams() {
+
+  public EntityList<Integer> getParams() {
     return this.params;
   }
-  public int getParams(int index) {
+
+  public Integer getParams(int index) {
     assert index >= 0 && index < this.getPower() : "index must be in range from 0 to power";
-    return this.params[index];
+    return this.params.get(index);
   }
-  public void setParams(int[] params) {
+
+  public void setParams(EntityList<Integer> params) {
     assert params != null : "params are required!";
     this.params = params;
   }
+
   public void setParams(int index, int value) {
     assert index >= 0 && index < this.getPower() : "index must be in range from 0 to power";
-    this.params[index] = value;
+    this.params.addByIndex(index, value);
   }
+
   @Override
   public String toString() {
     return  "Polynom {" +
             "\tpower: " + this.power + '\n' +
-            "\tparams: " + Arrays.toString(this.params) + '\n' +
+            "\tparams: " + this.params.toString() + '\n' +
             "}";
   }
+
   @Override
-  public boolean equals(Object object) {
-    if (this == object) return true;
-    if (!(object instanceof Polynom)) return false;
-    Polynom polynom = (Polynom) object;
-    return this.getPower() == polynom.getPower() && Arrays.equals(this.getParams(), polynom.getParams());
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Polynom polynom = (Polynom) o;
+    return power == polynom.power &&
+            Objects.equals(params, polynom.params);
   }
+
   @Override
   public int hashCode() {
-    int result = Objects.hash(this.getPower());
-    return 31 * result + Arrays.hashCode(this.getParams());
+    return Objects.hash(power, params);
   }
+
   public void add(Polynom polynom) {
     assert polynom != null : "polynom is required!";
     int resultPower = this.getPower() > polynom.getPower() ? this.getPower() : polynom.getPower();
@@ -63,6 +77,7 @@ class Polynom {
       sum.setParams(index, next);
     }
   }
+
   public void multiply(Polynom polynom) {
     assert polynom != null : "multiplier polynom is required!";
     int resultPower = this.getPower() > polynom.getPower() ? this.getPower() : polynom.getPower();
@@ -70,15 +85,16 @@ class Polynom {
     for (int index = 0; index < resultPower; index++) {
       int current = this.getParams(index);
       int multiplier = polynom.getParams(index);
-      this.params[index] = current * multiplier;
+      this.params.addByIndex(index, current * multiplier);
     }
   }
+
   public void input() {
     Scanner input = new Scanner(System.in);
     System.out.println("Введите степень многочлена:");
     int valuePower = input.nextInt();
     this.setPower(valuePower);
-    int[] valueParams = new int[valuePower + 2];
+    EntityList<Integer> valueParams = new EntityList<>(){{add(valuePower + 2);}};
     this.setParams(valueParams);
     System.out.println("Введите коэфиценты многочлена:");
     for (int index = 0; index <= this.getPower(); index++) {
@@ -86,6 +102,7 @@ class Polynom {
       this.setParams(index, value);
     }
   }
+
   public void output() {
     int power = this.getPower();
     while (this.getParams(power) == 0) power++;
@@ -121,20 +138,5 @@ class Polynom {
       System.out.println(string.toString());
     }
   }
-  public static void main(String[] args) {
-    Polynom polynom1 = new Polynom(1);
-    polynom1.input();
-    System.out.print("P(x) = ");
-    polynom1.output();
-    Polynom polynom2 = new Polynom(2);
-    polynom2.input();
-    System.out.print("Q(x) = ");
-    polynom2.output();
-    polynom1.add(polynom2);
-    System.out.print("P(x) + Q(x) = ");
-    polynom2.output();
-    polynom1.multiply(polynom2);
-    System.out.print("P(x) * Q(x) = ");
-    polynom2.output();
-  }
+
 }

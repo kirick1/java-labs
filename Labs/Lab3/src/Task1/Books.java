@@ -5,22 +5,28 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Books {
+
   private Book[] books;
-  Books (Book[] books) {
+
+  public Books (Book[] books) {
     assert books != null : "books are required!";
     this.books = books;
   }
+
   public Book[] getBooks() {
     return this.books;
   }
+
   public void setBooks(Book[] books) {
     assert books != null : "books are required!";
     this.books = books;
   }
+
   @Override
   public String toString() {
     return Arrays.toString(this.books);
   }
+
   @Override
   public boolean equals(Object object) {
     if (this == object) return true;
@@ -28,20 +34,23 @@ public class Books {
     Books books = (Books) object;
     return Arrays.equals(this.getBooks(), books.getBooks());
   }
+
   @Override
   public int hashCode() {
     return Arrays.hashCode(this.getBooks());
   }
-  public Books getBooksByAuthor(Author author) {
+
+  public Books getBooksByAuthor(Task1.Author author) {
     assert author != null : "author is required!";
     List<Book> result = new ArrayList<>();
     for (Book book : this.getBooks()) {
-      for (Author current : book.getAuthors()) {
+      for (Author current : book.getAuthors().getElements()) {
         if (current.equals(author)) result.add(book);
       }
     }
     return new Books(result.toArray(new Book[result.size()]));
   }
+
   public Books getBooksByPublisher(Publisher publisher) {
     assert publisher != null : "publisher is required!";
     List<Book> result = new ArrayList<>();
@@ -50,6 +59,7 @@ public class Books {
     }
     return new Books(result.toArray(new Book[result.size()]));
   }
+
   public Books getBooksOlderThen(int year) {
     assert year <= 2018 : "year cannot be from future!";
     List<Book> result = new ArrayList<>();
@@ -58,25 +68,5 @@ public class Books {
     }
     return new Books(result.toArray(new Book[result.size()]));
   }
-  public static void main (String[] args) {
-    Author Ivan = new Author("Ivan", "Ivanov");
-    Author Petro = new Author("Petro", "Poroshenko");
-    Publisher publisher1 = new Publisher("FIRST");
-    Publisher publisher2 = new Publisher("SECOND");
-    Book book1 = new Book(0, "book1", new Author[] { Ivan, Petro }, publisher1, 2017, 100, 75.0, Binding.CARDBOARD);
-    Book book2 = new Book(1, "book2", new Author[] { Petro }, publisher2, 2016, 200, 100.0, Binding.PLASTIC);
-    Book book3 = new Book(2, "book3", new Author[] { Ivan }, publisher1, 2018, 150, 99.9, Binding.FABRIC);
-    System.out.println("All books:");
-    Books books = new Books(new Book[] { book1, book2, book3 });
-    System.out.println(books);
-    System.out.println("Books for author: " + Petro.getFirstName() + " " + Petro.getLastName() + ":");
-    Books authorBooks = books.getBooksByAuthor(Petro);
-    System.out.println(authorBooks);
-    System.out.println("Books published by: " + publisher1.getTitle() + ":");
-    Books publisherBooks = books.getBooksByPublisher(publisher1);
-    System.out.println(publisherBooks);
-    System.out.println("Books after " + 2017 + ":");
-    Books booksOlder = books.getBooksOlderThen(2017);
-    System.out.println(booksOlder);
+
   }
-}

@@ -3,21 +3,25 @@ package Task2;
 import java.util.Arrays;
 
 public class Matrix {
+
   private int[][] matrix;
 
   public Matrix(int[][] matrix) {
     if (!this.isValid(matrix)) throw new IllegalArgumentException("array is not valid matrix");
     this.matrix = matrix;
   }
+
   public Matrix(int size) {
     assert size >= 0 : "size must be positive!";
     this.matrix = new int[size][size];
   }
+
   public Matrix(int rows, int columns) {
     assert rows >= 0 : "rows number must be positive!";
     assert columns >= 0 : "columns number must be positive!";
     this.matrix = new int[rows][columns];
   }
+
   private boolean isValid(int[][] matrix) {
     if (matrix == null) return false;
     int rowsNumber = matrix.length;
@@ -29,20 +33,25 @@ public class Matrix {
     }
     return true;
   }
+
   private int[][] getMatrix() {
     return this.matrix;
   }
+
   public void setMatrix(int[][] matrix) {
     if (!this.isValid(matrix)) throw new IllegalArgumentException("array is not valid matrix");
     this.matrix = matrix;
   }
+
   private int getRowsNumber() {
     return this.getMatrix().length;
   }
+
   private int getColumnsNumber() {
     if (this.getRowsNumber() == 0) return 0;
     return this.getMatrix()[0].length;
   }
+
   private int getMaxInColumn(int column) {
     assert column >= 0 && column <= this.getColumnsNumber() : "value must be in range between!";
     int maxRow = 0;
@@ -57,6 +66,7 @@ public class Matrix {
     }
     return maxRow;
   }
+
   private int getMinInColumn(int column) {
     assert column >= 0 && column <= this.getColumnsNumber() : "value must be in range between!";
     int minRow = 0;
@@ -71,6 +81,7 @@ public class Matrix {
     }
     return minRow;
   }
+
   @Override
   public boolean equals(Object object) {
     if (this == object) return true;
@@ -78,10 +89,12 @@ public class Matrix {
     Matrix matrix = (Matrix) object;
     return Arrays.equals(this.getMatrix(), matrix.getMatrix());
   }
+
   @Override
   public int hashCode() {
     return Arrays.hashCode(this.getMatrix());
   }
+
   @Override
   public String toString() {
     StringBuilder string = new StringBuilder("[");
@@ -100,7 +113,8 @@ public class Matrix {
     string.append("]\n");
     return string.toString();
   }
-  private void replaceMaxAndMinInColumn(int column) {
+
+  public void replaceMaxAndMinInColumn(int column) {
     assert column >= 0 && column <= this.getColumnsNumber() : "value must be in range between!";
     int maxRow = this.getMaxInColumn(column);
     int max = this.getMatrix()[maxRow][column];
@@ -109,9 +123,11 @@ public class Matrix {
     this.matrix[maxRow][column] = min;
     this.matrix[minRow][column] = max;
   }
-  private boolean isValidToMultiply() {
+
+  public boolean isValidToMultiply() {
     return this.getRowsNumber() == this.getColumnsNumber();
   }
+
   private void multiply(Matrix matrix) {
     if (!this.isValid(matrix.getMatrix())) throw new IllegalArgumentException("multiplier matrix is not valid!");
     int currentColumns = this.getColumnsNumber();
@@ -131,44 +147,12 @@ public class Matrix {
     }
     this.matrix = tmp;
   }
-  private void square() {
+
+  public Matrix square() {
     Matrix current = new Matrix(this.getMatrix());
     this.multiply(current);
+    return current;
   }
-  public static void main (String[] args) {
-    System.out.println("Matrix1:");
-    Matrix matrix1 = new Matrix(new int[][] {
-        {33,34,12},
-        {33,19,10},
-        {12,14,17},
-        {84,24,51},
-        {43,71,21}
-    });
-    System.out.println(matrix1);
-    System.out.println("Matrix2:");
-    Matrix matrix2 = new Matrix(new int[][] {
-        {10,11,34,55},
-        {33,45,17,81},
-        {45,63,12,16}
-    });
-    System.out.println(matrix2);
-    System.out.println("Matrix3:");
-    Matrix matrix3 = new Matrix(new int[][] {
-        {1, 3, 4, 5},
-        {8, 1, 9, 10},
-        {2, 1, 4, 19},
-        {2, 3, 1, 2}
-    });
-    System.out.println(matrix3);
-    System.out.println("Matrices:");
-    Matrix[] matrices1 = new Matrix[] { matrix1, matrix2, matrix3 };
-    System.out.println(Arrays.toString(matrices1));
-    System.out.println("Replaced max and min:");
-    for (Matrix matrix : matrices1) matrix.replaceMaxAndMinInColumn(1);
-    System.out.println(Arrays.toString(matrices1));
-    Matrix[] matrices2 = new Matrix[] { matrix1, matrix2, matrix3 };
-    System.out.println("Square:");
-    for (Matrix matrix : matrices2) if (matrix.isValidToMultiply()) matrix.square();
-    System.out.println(Arrays.toString(matrices2));
-  }
+
+
 }

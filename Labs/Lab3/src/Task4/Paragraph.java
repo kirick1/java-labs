@@ -1,46 +1,53 @@
 package Task4;
 
+import сommon.EntityList;
+
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Paragraph {
-  private Word[] words;
-  Paragraph(Word[] words) {
+
+  private EntityList<Word> words;
+
+  public Paragraph(EntityList<Word> words) {
     assert words != null : "words are required";
     this.words = words;
   }
-  public Word[] getWords() {
+
+  public EntityList<Word> getWords() {
     return this.words;
   }
-  public void setWords(Word[] words) {
+
+  public void setWords(EntityList<Word> words) {
     assert words != null : "words are required";
     this.words = words;
   }
+
   public int getLength() {
     int result = 0;
-    for (Word word : this.getWords()) result += word.getLength();
+    for (Word word : this.getWords().getElements()) result += word.getLength();
     return result;
   }
+
   @Override
-  public boolean equals(Object object) {
-    if (this == object) return true;
-    if (!(object instanceof Paragraph)) return false;
-    Paragraph paragraph = (Paragraph) object;
-    return Arrays.equals(this.getWords(), paragraph.getWords());
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Paragraph paragraph = (Paragraph) o;
+    return Objects.equals(words, paragraph.words);
   }
+
   @Override
   public int hashCode() {
-    return Arrays.hashCode(this.getWords());
+    return Objects.hash(words);
   }
+
   @Override
   public String toString() {
     return  "Paragraph {" +
-            "\twords: " + Arrays.toString(this.words) + '\n' +
+            "\twords: " + this.words.toString() + '\n' +
             "}";
   }
-  public static void main(String[] args) {
-    Word hello = new Word("hello");
-    Word world = new Word("world");
-    Paragraph paragraph = new Paragraph(new Word[] { hello, world });
-    System.out.println(paragraph);
-  }
+
+
 }
