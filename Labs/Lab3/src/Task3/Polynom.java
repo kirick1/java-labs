@@ -5,10 +5,11 @@ import java.util.*;
 class Polynom {
   private int power;
   private int[] params;
+
   Polynom(int power) {
     this.power = power;
     this.params = new int[this.power + 1];
-    for (int i = 0; i<= this.power; i++) {
+    for (int i = 0; i <= this.power; i++) {
       this.params[i] = 0;
     }
   }

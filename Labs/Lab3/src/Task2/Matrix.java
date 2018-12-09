@@ -4,15 +4,16 @@ import java.util.Arrays;
 
 public class Matrix {
   private int[][] matrix;
-  Matrix(int[][] matrix) {
+
+  public Matrix(int[][] matrix) {
     if (!this.isValid(matrix)) throw new IllegalArgumentException("array is not valid matrix");
     this.matrix = matrix;
   }
-  Matrix(int size) {
+  public Matrix(int size) {
     assert size >= 0 : "size must be positive!";
     this.matrix = new int[size][size];
   }
-  Matrix(int rows, int columns) {
+  public Matrix(int rows, int columns) {
     assert rows >= 0 : "rows number must be positive!";
     assert columns >= 0 : "columns number must be positive!";
     this.matrix = new int[rows][columns];
@@ -115,7 +116,7 @@ public class Matrix {
     if (!this.isValid(matrix.getMatrix())) throw new IllegalArgumentException("multiplier matrix is not valid!");
     int currentColumns = this.getColumnsNumber();
     int multiplierRows = matrix.getRowsNumber();
-    if (currentColumns != multiplierRows) throw new IllegalArgumentException("multiplier matrix rows number must be equal with current matrix columns number!");
+    assert currentColumns == multiplierRows : "multiplier matrix rows number must be equal with current matrix columns number!";
     int currentRows = this.getRowsNumber();
     int multiplierColumns = matrix.getColumnsNumber();
     int[][] tmp = new int[currentRows][multiplierColumns];

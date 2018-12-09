@@ -7,13 +7,14 @@ import java.util.List;
 public class Books {
   private Book[] books;
   Books (Book[] books) {
+    assert books != null : "books are required!";
     this.books = books;
   }
   public Book[] getBooks() {
     return this.books;
   }
   public void setBooks(Book[] books) {
-    if (null == books) throw new IllegalArgumentException("books are required!");
+    assert books != null : "books are required!";
     this.books = books;
   }
   @Override
@@ -32,7 +33,7 @@ public class Books {
     return Arrays.hashCode(this.getBooks());
   }
   public Books getBooksByAuthor(Author author) {
-    if (author == null) throw new IllegalArgumentException("author is required!");
+    assert author != null : "author is required!";
     List<Book> result = new ArrayList<>();
     for (Book book : this.getBooks()) {
       for (Author current : book.getAuthors()) {
@@ -42,7 +43,7 @@ public class Books {
     return new Books(result.toArray(new Book[result.size()]));
   }
   public Books getBooksByPublisher(Publisher publisher) {
-    if (publisher == null) throw new IllegalArgumentException("publisher is required!");
+    assert publisher != null : "publisher is required!";
     List<Book> result = new ArrayList<>();
     for (Book book : this.getBooks()) {
       if (book.getPublisher().equals(publisher)) result.add(book);
@@ -50,7 +51,7 @@ public class Books {
     return new Books(result.toArray(new Book[result.size()]));
   }
   public Books getBooksOlderThen(int year) {
-    if (year > 2018) throw new IllegalArgumentException("year cannot be from future!");
+    assert year <= 2018 : "year cannot be from future!";
     List<Book> result = new ArrayList<>();
     for (Book book : this.getBooks()) {
       if (book.getYear() > year) result.add(book);

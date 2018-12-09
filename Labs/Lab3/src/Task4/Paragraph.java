@@ -12,7 +12,13 @@ public class Paragraph {
     return this.words;
   }
   public void setWords(Word[] words) {
+    assert words != null : "words are required";
     this.words = words;
+  }
+  public int getLength() {
+    int result = 0;
+    for (Word word : this.getWords()) result += word.getLength();
+    return result;
   }
   @Override
   public boolean equals(Object object) {
@@ -27,9 +33,9 @@ public class Paragraph {
   }
   @Override
   public String toString() {
-    return "Paragraph {" +
-        "\twords: " + Arrays.toString(this.words) +
-        '}';
+    return  "Paragraph {" +
+            "\twords: " + Arrays.toString(this.words) + '\n' +
+            "}";
   }
   public static void main(String[] args) {
     Word hello = new Word("hello");

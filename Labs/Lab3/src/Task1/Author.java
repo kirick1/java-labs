@@ -6,6 +6,8 @@ public class Author {
   private String firstName;
   private String lastName;
   Author (String firstName, String lastName) {
+    assert firstName != null : "firstName is required!";
+    assert lastName != null : "lastName is required!";
     this.firstName = firstName;
     this.lastName = lastName;
   }
@@ -13,14 +15,14 @@ public class Author {
     return this.firstName;
   }
   public void setFirstName (String firstName) {
-    if (firstName == null) throw new IllegalArgumentException ("firstName is required!");
+    assert firstName != null : "firstName is required!";
     this.firstName = firstName;
   }
   public String getLastName () {
     return this.lastName;
   }
   public void setLastName (String lastName) {
-    if (lastName == null) throw new IllegalArgumentException ("lastName is required!");
+    assert lastName != null : "lastName is required!";
     this.lastName = lastName;
   }
   @Override
@@ -40,18 +42,5 @@ public class Author {
   @Override
   public int hashCode () {
     return Objects.hash(this.getFirstName(), this.getLastName());
-  }
-  public Book[] getBooks(Book[] books) {
-    if (books == null) throw new IllegalArgumentException("books array is required!");
-    int booksNumber = books.length;
-    Book[] result = new Book[booksNumber];
-    for (int index = 0, counter = 0; index < booksNumber && counter < booksNumber; index++) {
-      Book book = books[index];
-      if (book.getAuthors().equals(this)) {
-        result[counter] = book;
-        counter++;
-      }
-    }
-    return result;
   }
 }

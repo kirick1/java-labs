@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import static java.util.Objects.*;
 
-class Book {
+public class Book {
   private int id;
   private String title;
   private Author[] authors;
@@ -35,46 +35,48 @@ class Book {
   }
   public void setTitle (String title) {
     if (title == null) throw new NullPointerException("title is required!");
+    this.title = title;
   }
   public Author[] getAuthors() {
     return this.authors;
   }
   public void setAuthors(Author[] authors) {
-    if (authors == null) throw new NullPointerException("authors is required!");
+    assert authors != null : "authors is required!";
     this.authors = authors;
   }
   public Publisher getPublisher () {
     return this.publisher;
   }
   public void setPublisher (Publisher publisher) {
-    if (publisher == null) throw new NullPointerException("publisher is required!");
+    assert publisher != null : "publisher is required!";
     this.publisher = publisher;
   }
   public int getYear () {
     return this.year;
   }
   public void setYear (int year) {
-    if (year > 2018) throw new IllegalArgumentException ("year cannot be from future!");
+    assert year <= 2018 : "year cannot be from future!";
     this.year = year;
   }
   public int getPages () {
     return this.pages;
   }
   public void setPages (int pages) {
-    if (pages < 0) throw new IllegalArgumentException ("pages must be positive!");
+    assert pages >= 0 : "pages must be positive!";
     this.pages = pages;
   }
   public double getPrice () {
     return this.price;
   }
   public void setPrice (double price) {
-    if (price < 0.0) throw new IllegalArgumentException ("price must be positive!");
+    assert price >= 0.0 : "price must be positive!";
     this.price = price;
   }
   public Binding getBinging () {
     return this.binging;
   }
   public void setBinging (Binding binging) {
+    assert binging != null : "binding is required!";
     this.binging = binging;
   }
   @Override
