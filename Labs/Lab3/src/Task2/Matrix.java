@@ -1,6 +1,7 @@
 package Task2;
 
 import java.util.Arrays;
+import common.MatrixUtils;
 
 public class Matrix {
 
@@ -35,7 +36,7 @@ public class Matrix {
   }
 
   private int[][] getMatrix() {
-    return this.matrix;
+    return MatrixUtils.copy(this.matrix);
   }
 
   public void setMatrix(int[][] matrix) {
@@ -153,6 +154,4 @@ public class Matrix {
     this.multiply(current);
     return current;
   }
-
-
 }

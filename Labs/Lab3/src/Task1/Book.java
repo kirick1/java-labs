@@ -36,7 +36,7 @@ public class Book {
   }
 
   public int getId () {
-    return this.id;
+    return id;
   }
 
   public void setId (int id) {
@@ -45,7 +45,7 @@ public class Book {
   }
 
   public String getTitle () {
-    return this.title;
+    return title;
   }
 
   public void setTitle (String title) {
@@ -54,7 +54,7 @@ public class Book {
   }
 
   public EntityList<Author> getAuthors() {
-    return this.authors;
+    return authors;
   }
 
   public void setAuthors(EntityList<Author> authors) {
@@ -63,7 +63,7 @@ public class Book {
   }
 
   public Publisher getPublisher () {
-    return this.publisher;
+    return publisher;
   }
 
   public void setPublisher (Publisher publisher) {
@@ -72,7 +72,7 @@ public class Book {
   }
 
   public int getYear () {
-    return this.year;
+    return year;
   }
 
   public void setYear (int year) {
@@ -81,7 +81,7 @@ public class Book {
   }
 
   public int getPages () {
-    return this.pages;
+    return pages;
   }
 
   public void setPages (int pages) {
@@ -99,7 +99,7 @@ public class Book {
   }
 
   public Binding getBinging () {
-    return this.binging;
+    return binging;
   }
 
   public void setBinging (Binding binging) {

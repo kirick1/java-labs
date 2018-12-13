@@ -18,7 +18,7 @@ class Polynom {
   }
 
   public int getPower() {
-    return this.power;
+    return power;
   }
 
   public void setPower(int power) {
@@ -26,7 +26,7 @@ class Polynom {
   }
 
   public EntityList<Integer> getParams() {
-    return this.params;
+    return params;
   }
 
   public Integer getParams(int index) {

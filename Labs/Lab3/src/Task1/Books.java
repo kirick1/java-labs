@@ -14,7 +14,7 @@ public class Books {
   }
 
   public Book[] getBooks() {
-    return this.books;
+    return books;
   }
 
   public void setBooks(Book[] books) {
@@ -68,5 +68,4 @@ public class Books {
     }
     return new Books(result.toArray(new Book[result.size()]));
   }
-
-  }
+}

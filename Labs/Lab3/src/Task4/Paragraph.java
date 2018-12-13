@@ -15,7 +15,7 @@ public class Paragraph {
   }
 
   public EntityList<Word> getWords() {
-    return this.words;
+    return words;
   }
 
   public void setWords(EntityList<Word> words) {
